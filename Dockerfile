@@ -5,6 +5,7 @@ WORKDIR /deployments
 
 # Copy the precompiled Quarkus files and dependencies
 COPY quarkus-run.jar /deployments/
+COPY app/ /deployments/app/
 COPY lib/ /deployments/lib/
 COPY quarkus/ /deployments/quarkus/
 COPY config/ /deployments/config/
