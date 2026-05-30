@@ -14,9 +14,21 @@ La API de **Searchpe** es un servicio REST desarrollado sobre **Quarkus** que pe
 
 ---
 
+## Infraestructura de Datos y Despliegue
+
+El servicio REST interactúa de forma directa con una base de datos PostgreSQL remota y optimizada para albergar millones de registros pertenecientes al padrón de la SUNAT.
+
+> [!IMPORTANT]
+> **URL Desplegada de la Base de Datos (API Backend):**
+> `postgresql://134.209.151.255:13928/defaultdb?sslmode=require`
+>
+> **Nota de Integración:** La cadena de conexión JDBC equivalente utilizada por el backend es `jdbc:postgresql://134.209.151.255:13928/defaultdb?sslmode=require`. Todas las transacciones, inserciones y consultas de RUC realizadas por la API se sincronizan en tiempo real contra este entorno de persistencia remota alojado en Aiven Cloud.
+
+---
+
 ## Seguridad y Autenticación
 
-El comportamiento de la seguridad se controla a través de la propiedad `searchpe.disable.authorization` en el archivo [application.properties](file:///c:/Users/ASUS/Downloads/searchpe-4.1.1/searchpe-4.1.1/config/application.properties):
+El comportamiento de la seguridad se controla a través de la propiedad `searchpe.disable.authorization` en el archivo application.properties:
 
 1. **Modo Desarrollo (Seguridad Desactivada - Configuración Actual):**
    * Propiedad: `searchpe.disable.authorization=true`
