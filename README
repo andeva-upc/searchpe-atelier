@@ -1,0 +1,49 @@
+# Searchpe - Contributor Search Service (SUNAT)
+
+This project is a REST API service built on **Quarkus** designed to store and query the Peruvian taxpayers database (RUC) from SUNAT in a fast and simple way.
+
+---
+
+## Database (PostgreSQL on Aiven Cloud)
+
+The project is configured to connect to a remote PostgreSQL database hosted on **Aiven Cloud**:
+* **Host/IP:** `134.209.151.255` (Resolved from `searchpe-atelier-database.l.aivencloud.com`)
+* **Port:** `13928`
+* **Database Name:** `defaultdb`
+* **SSL Mode:** `require`
+
+The database schema is automatically created and updated using **Flyway** migrations when the application starts.
+
+---
+
+## Configurations Applied
+
+Custom settings can be found in the [application.properties](file:///c:/Users/ASUS/Downloads/searchpe-4.1.1/searchpe-4.1.1/config/application.properties) file:
+
+1. **Cloud Database Credentials**: Configured with user `avnadmin` and SSL support.
+2. **Advanced Search Enabled**: Set `searchpe.allow.advancedSearch=true` to allow queries and listing of contributors without restrictions.
+3. **Mock Data Loaded**: For university project purposes, a database partition has been created (`CONTRIBUYENTE_VERSION_1`) and populated with **10 mock Peruvian contributors** (valid RUCs starting with 10 and 20) associated with a completed active version.
+
+---
+
+## How to Run Searchpe
+
+Since you are in a **Windows** environment, to start the application you just need to run the batch script located in the bin directory:
+
+```bash
+.\bin\standalone.bat
+```
+
+This will spin up the Quarkus server, which will be listening on:
+**[http://localhost:8180/](http://localhost:8180/)** (Web Graphical User Interface)
+
+---
+
+## API Documentation
+
+The REST API endpoints are available under the `/api` prefix:
+* **Query a specific RUC:** `GET http://localhost:8180/api/contribuyentes/{ruc}`
+* **Search / List contributors:** `GET http://localhost:8180/api/contribuyentes?filterText={query}`
+
+For full technical specifications, HTTP response codes, and copy-pasteable examples in **JavaScript (Fetch)** and **Java (HttpClient)**, please check the dedicated documentation file:
+**[API_DOCUMENTATION.md](file:///c:/Users/ASUS/Downloads/searchpe-4.1.1/searchpe-4.1.1/API_DOCUMENTATION.md)**
